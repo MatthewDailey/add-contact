@@ -21,7 +21,8 @@ import android.widget.Button;
  * 		iii) view your contacts list in most recently added order.
  * 		iv) set the name the app send in action (ii)                  
  */
-public class AddContactMenu extends Activity {
+public class AddContactMenu extends Activity 
+{
 	
 	/*
 	 * (non-Javadoc)
@@ -52,7 +53,8 @@ public class AddContactMenu extends Activity {
         b1.setOnClickListener(new OnClickListener()
         {
         	@Override
-        	public void onClick(View arg0){
+        	public void onClick(View arg0)
+        	{
         		addFromText();
         	}
         });        
@@ -72,7 +74,8 @@ public class AddContactMenu extends Activity {
         b3.setOnClickListener(new OnClickListener()
         {
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View arg0) 
+			{
 				viewRecentContacts();
 			}
         });    
@@ -82,7 +85,8 @@ public class AddContactMenu extends Activity {
         b4.setOnClickListener(new OnClickListener()
         {
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View arg0) 
+			{
 				Intent i = new Intent();
 				i.setClass(AddContactMenu.this, SetName.class);
 				AddContactMenu.this.startActivity(i);
