@@ -47,6 +47,15 @@
             android:name=".AddFromText"
             android:label="@string/title_activity_add_from_text" >
         </activity>
+        <activity
+            android:name=".HowToUse"
+            android:label="@string/title_activity_how_to_use" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

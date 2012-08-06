@@ -7,8 +7,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -19,7 +22,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
-
+ 
 /**
  * ViewRecentContacts
  * @author Matt
@@ -53,6 +56,40 @@ public class ViewRecentContacts extends Activity
         /* asynchronously load contacts list */
         new LoadContacts(getContentResolver()).execute();
 	}
+	
+	/* set up menu buttons */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	
+    	/* create a set name option in the menu */
+    	MenuItem setName = menu.add("Set Name");
+    	setName.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(ViewRecentContacts.this, SetName.class);
+				ViewRecentContacts.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
+    	/* create an info option in the menu */
+    	MenuItem info = menu.add("How to use Add Contact");
+    	info.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(ViewRecentContacts.this, HowToUse.class);
+				ViewRecentContacts.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
+        getMenuInflater().inflate(R.menu.recentcontacts, menu);
+        return true;
+    }
 	
 	/**
 	 * LoadContacts

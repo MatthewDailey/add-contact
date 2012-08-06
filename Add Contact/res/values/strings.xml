@@ -10,10 +10,10 @@
     <string name="title_activity_add_from_text">AddFromText</string>
     <string name="recent_contacts">Recent Contacts</string>
     <string name="from_dialpad">From Dialpad</string>
-    <string name="from_text">From Text</string>
+    <string name="from_text">From SMS</string>
     <string name="name_to_send">Name to be sent to new contacts:</string>
     <string name="set_name">Set Name</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading &#8230;</string>
     <string name="r_a_c">Recently Added Contacts</string>
     <string name="name">Name:</string>
     <string name="phone_num">Phone number:</string>
@@ -22,5 +22,35 @@
     <string name="add">ADD</string>
     <string name="contact">CONTACT</string>
     <string name="r_t_m">Recent Text Messages</string>
-
+    <string name="title_activity_how_to_use">HowToUse</string>
+    
+    <!-- strings for info page  -->
+	<string name="header">How to use Add Contact</string>
+	<string name="uses3">This app allows you to perform 3 actions:</string>
+	<string name="item1">1. Add a contact from a recently received SMS message.</string>
+	<string name="item2">2. Add a contact from a traditional dialpad and send the new contact an SMS message including your name.</string>
+	<string name="item3">3. View your contacts in the order the were added (newest contact at the top).</string>
+	<string name="add_sms_title">1. Add from SMS</string>
+	<string name="add_sms_instruct_1">Clicking the \"From SMS\" button on the main page will display 
+	    a list of your most recent SMS messages with the most recent at the top. 
+	    A message from a known contact will display that contact\'s name and the SMS message content.  
+	     Messages from unknown numbers display the number followed by the message content.</string>
+	<string name="add_sms_instruct_2">Clicking on a message from an unkown number will add a contact whose name 
+	    is the content of that SMS message. </string> 
+	<string name="add_dialpad_title">2. Add from DialPad</string>
+	<string name="add_dp_instruct_1">Clicking the \"From Dialpad\" button 
+	    allows you to add a contact by entering a name a number. The number
+	    will automatically be set as the contact\'s mobile number.</string>
+	<string name="add_dp_instruct_2">You also have the option to send the
+	    new contact a SMS message containing your name. If no name is set
+	    when you try to toggle this feature on, you will be asked to set your 
+	    name. You can also set your
+	    name by clicking the menu button on your phone
+		and then clicking \"Set Name\".   
+	   </string>	 
+	   <string name="recent_cont_title">3. View Recent Contacts</string>
+	<string name="recent_cont_instruct_1">You can view your contacts list
+	     most recently added order by
+	    clicking the \"Recent Contacts\" button. Clicking a contact in the
+	    list will take you to that contacts page.</string>   
 </resources>

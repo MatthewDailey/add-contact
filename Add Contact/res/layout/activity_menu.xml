@@ -8,26 +8,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="false"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="false"
         android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:layout_margin="0dp"
         android:padding="0dp"
         android:text="@string/add"
         android:textSize="60sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:typeface="monospace" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="false"
         android:layout_below="@+id/textView1"
- 		android:textSize="60sp"
-		android:textStyle="bold"
+        android:layout_centerInParent="true"
         android:layout_margin="0dp"
         android:padding="0dp"
-        android:text="@string/contact" />
-    
+        android:text="@string/contact"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:typeface="monospace" />
     
     <LinearLayout
         android:layout_width="wrap_content"
@@ -67,12 +70,5 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/set_name" />
 
 </RelativeLayout>

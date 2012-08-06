@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.telephony.SmsManager;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -213,10 +215,37 @@ public class AddFromDialpad extends Activity {
     }
         
     /**
-     * Unused.
+     * Set up options menu to either set name or show how-to
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+    	
+    	/* create a set name option in the menu */
+    	MenuItem setName = menu.add("Set Name");
+    	setName.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(AddFromDialpad.this, SetName.class);
+				AddFromDialpad.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
+    	/* create an info option in the menu */
+    	MenuItem info = menu.add("How to use Add Contact");
+    	info.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(AddFromDialpad.this, HowToUse.class);
+				AddFromDialpad.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
         getMenuInflater().inflate(R.menu.activity_add_from_dialpad, menu);
         return true;
     }

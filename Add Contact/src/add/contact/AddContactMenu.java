@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -80,30 +82,47 @@ public class AddContactMenu extends Activity
 			}
         });    
         
-        /* bind set name button */
-        Button b4 = (Button) this.findViewById(R.id.button4);
-        b4.setOnClickListener(new OnClickListener()
-        {
-			@Override
-			public void onClick(View arg0) 
-			{
-				Intent i = new Intent();
-				i.setClass(AddContactMenu.this, SetName.class);
-				AddContactMenu.this.startActivity(i);
-			}
-        });
     }
     
     /**
-     * Unused. No settings
+     * Open options list which allows the user to change the name which
+     * will be texted to new contacts as well as an information page.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) 
     {	
+    	
+    	/* create a set name option in the menu */
+    	MenuItem setName = menu.add("Set Name");
+    	setName.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(AddContactMenu.this, SetName.class);
+				AddContactMenu.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
+    	/* create an info option in the menu */
+    	MenuItem info = menu.add("How to use Add Contact");
+    	info.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(AddContactMenu.this, HowToUse.class);
+				AddContactMenu.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
+    	
         getMenuInflater().inflate(R.menu.activity_menu, menu);
         return true;
     }
-
+    
     /**
      * Add a contact from a text message. Start new activity on top of the
      * menu displaying list of most recent text messages.

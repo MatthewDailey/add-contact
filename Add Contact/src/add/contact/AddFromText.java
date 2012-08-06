@@ -10,12 +10,15 @@ import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -268,10 +271,37 @@ public class AddFromText extends Activity {
     }
     
     /**
-     * Unused.
+     * Set up options menu to either set name or how-to
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+    	
+    	/* create a set name option in the menu */
+    	MenuItem setName = menu.add("Set Name");
+    	setName.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(AddFromText.this, SetName.class);
+				AddFromText.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
+    	/* create an info option in the menu */
+    	MenuItem info = menu.add("How to use Add Contact");
+    	info.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(AddFromText.this, HowToUse.class);
+				AddFromText.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
         getMenuInflater().inflate(R.menu.activity_add_from_text, menu);
         return true;
     }
