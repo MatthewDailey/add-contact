@@ -14,6 +14,7 @@
         android:layout_margin="0dp"
         android:padding="0dp"
         android:text="@string/add"
+        android:textColor="#0055AA"
         android:textSize="60sp"
         android:textStyle="bold"
         android:typeface="monospace" />
@@ -28,6 +29,7 @@
         android:layout_margin="0dp"
         android:padding="0dp"
         android:text="@string/contact"
+        android:textColor="#0055AA"
         android:textSize="60sp"
         android:textStyle="bold"
         android:typeface="monospace" />
@@ -48,6 +50,7 @@
             android:layout_height="wrap_content"
             android:padding="25dp"
             android:text="@string/from_text"
+            android:textColor="#000000"
             android:textSize="@dimen/padding_large" />
 
         <Button

@@ -3,6 +3,7 @@ package add.contact;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /***
@@ -37,9 +39,9 @@ public class AddContactMenu extends Activity
         /* set up layout */
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_menu);    
-
+        
         /* bind listeners to menu buttons */
-        prepareButtons();
+        prepareScreen();
     }
 
     /**
@@ -48,8 +50,15 @@ public class AddContactMenu extends Activity
      * bind onClick listeners to menu buttons. needs to be called on create
      * and on restart. 
      **/
-    private void prepareButtons()
+    private void prepareScreen()
     {
+        Typeface type = Typeface.createFromAsset(this.getAssets(),
+                "ksafont.ttf");
+        TextView add = (TextView) this.findViewById(R.id.textView1);
+        TextView contacts = (TextView) this.findViewById(R.id.textView2);
+        add.setTypeface(type);
+        contacts.setTypeface(type);
+    	
     	/* bind activity to add from text button */
         Button b1 = (Button) this.findViewById(R.id.button1);
         b1.setOnClickListener(new OnClickListener()
@@ -162,6 +171,6 @@ public class AddContactMenu extends Activity
     	super.onRestart();
         setContentView(R.layout.activity_menu);
         
-        prepareButtons();
+        prepareScreen();
     }
 }

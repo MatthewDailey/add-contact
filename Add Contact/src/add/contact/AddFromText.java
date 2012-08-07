@@ -95,10 +95,10 @@ public class AddFromText extends Activity {
 			
 			ArrayList<TextInfo> recentTexts = new ArrayList<TextInfo>(); 
 
-			/* add at most 100 most recent text messages and create TextInfo
+			/* add at most 20 most recent text messages and create TextInfo
 			 * objects out of them to return.  */
 			int cnt = 0;
-			while( c.moveToNext() && cnt < 100)
+			while( c.moveToNext() && cnt < 20)
 			{
 				TextInfo ti = new TextInfo();
 				/* get the address which is the phone number then getName() to

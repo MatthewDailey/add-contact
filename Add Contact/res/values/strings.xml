@@ -19,8 +19,8 @@
     <string name="phone_num">Phone number:</string>
     <string name="send_w_name">Send text to new contact with your name.</string>
     <string name="add_cont">Add Contact</string>
-    <string name="add">ADD</string>
-    <string name="contact">CONTACT</string>
+    <string name="add">add</string>
+    <string name="contact">contact</string>
     <string name="r_t_m">Recent Text Messages</string>
     <string name="title_activity_how_to_use">HowToUse</string>
     

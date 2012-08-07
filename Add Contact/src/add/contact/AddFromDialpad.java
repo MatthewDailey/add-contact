@@ -54,6 +54,16 @@ public class AddFromDialpad extends Activity {
         
     }
 
+    @Override 
+    public void onRestart()
+    {
+    	super.onRestart();
+    	
+        setContentView(R.layout.add_from_dialpad);
+        
+        prepareButtons();
+    }
+    
     /**
      * Set onclick listeners for both the toggle button and the submit button.
      * 
@@ -140,6 +150,12 @@ public class AddFromDialpad extends Activity {
 				}
 			}
     	});
+
+    	/* make sure no erronious checked box */
+    	if( shouldSend.isChecked() && getName().equals(NO_NAME))
+    	{
+    		shouldSend.setChecked(false);
+    	}
     }
 
     /**
