@@ -50,8 +50,7 @@ public class AddFromDialpad extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.add_from_dialpad);
 
-        prepareButtons();
-        
+        prepareScreen();
     }
 
     @Override 
@@ -61,7 +60,7 @@ public class AddFromDialpad extends Activity {
     	
         setContentView(R.layout.add_from_dialpad);
         
-        prepareButtons();
+        prepareScreen();
     }
     
     /**
@@ -70,7 +69,7 @@ public class AddFromDialpad extends Activity {
      * The toggle button must check if a name has been set when a user attempts
      * to toggle on the message sending capabilities.
      */
-    private void prepareButtons()
+    private void prepareScreen()
     {
     	/* set addcontact button to submit contact */
     	Button b = (Button) this.findViewById(R.id.add_dial_button);
