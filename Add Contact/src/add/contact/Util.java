@@ -2,11 +2,13 @@ package add.contact;
 
 import java.util.ArrayList;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
@@ -64,6 +66,55 @@ public class Util
 	    int duration = Toast.LENGTH_SHORT;
 	    Toast toast = Toast.makeText(ctx, txt, duration);
 	    toast.show();
+    }
+    
+    /**
+     * Method to guess at the users name so that they may not have to
+     * manually enter the name.
+     * 
+     * @param cr content resolver to search the phone
+     * @return a best effort attempt at the phone's user's name
+     */
+    @TargetApi(14)
+	public static String getUserName(ContentResolver cr)
+    {
+    	/* return string */
+    	String result = "";
+    	
+    	/* break based on os version since user name retreival
+    	 * was not supported until verion 14    	 */
+    	if (android.os.Build.VERSION.SDK_INT >= 14) {
+        	
+        	/* get content uri */
+    		Uri uri = ContactsContract.Profile.CONTENT_URI;
+        	/* project only display name */
+        	String[] projection = new String []{
+        			ContactsContract.Contacts.DISPLAY_NAME
+        			
+        	};
+        	/* only get user data */
+        	String selection = ContactsContract.Contacts.IS_USER_PROFILE 
+        			+ " = '1'";
+        	/* get the cursor for query */
+        	Cursor c = cr.query(uri, projection, selection, null, null);
+
+        	/* retreive the name */
+        	try
+        	{
+        		if( c.moveToFirst() )
+        		{
+        			result = c.getString(
+        					c.getColumnIndex(
+        					ContactsContract.Contacts.DISPLAY_NAME));
+        		}
+        	}
+        	finally
+        	{
+        		c.close();
+        	}
+    	} 
+    	
+    	return result;
     }
     
     

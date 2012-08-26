@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,8 @@ public class AddFromDialpad extends Activity {
 	
 	/* name of preference file to look up chosen name to send */
     public static final String PREFS_NAME = "NameFile";
+    /* name of prefence file to look up saved state of inputs */
+    public static final String SAVED_INPUTS = "InputsFile";
     /* message to send if no name is set */
     public static final String NO_NAME = "No name is set in Add Contact but " +
     		"here is my number";
@@ -199,6 +202,8 @@ public class AddFromDialpad extends Activity {
     	final Intent i = new Intent();
     	i.setClass(this, SetName.class);
     	
+    	Util.getUserName(getContentResolver());
+    	
     	/* set up alert builder */
     	builder.setMessage("There is no name associated with this app. Would you like to add one?")
     	       .setCancelable(false)
@@ -261,9 +266,85 @@ public class AddFromDialpad extends Activity {
 			}
     	});
     	
+    	
         getMenuInflater().inflate(R.menu.activity_add_from_dialpad, menu);
         return true;
     }
-
     
+    /*
+     * Overriden to save input values for name and phone number.
+     * 
+     * (non-Javadoc)
+     * @see android.app.Activity#onPause()
+     */
+    @Override
+    protected void onPause()
+    {
+    	super.onPause();
+    	/* get the preference file to edit */
+    	SharedPreferences settings = getSharedPreferences(SAVED_INPUTS, 0);
+    	
+    	/* get the text fields with values to save */
+    	EditText phone_text = (EditText) AddFromDialpad.this.
+    			findViewById(R.id.phone_number_input);
+    	EditText name_text = (EditText) AddFromDialpad.this.
+    			findViewById(R.id.name_input);
+    	
+    	/* create editor and set current values */
+    	Editor editSettings = settings.edit();
+    	
+    	editSettings.putString("name", name_text.getText().toString() );
+    	editSettings.putString("number", phone_text.getText().toString() );
+
+    	editSettings.apply();
+    }
+    
+    /*
+     * Overriden to load saved values for name and phone number inputs.
+     * 
+     * (non-Javadoc)
+     * @see android.app.Activity#onResume()
+     */
+    @Override
+    protected void onResume()
+    {
+    	super.onResume();
+    	
+    	SharedPreferences settings = getSharedPreferences(SAVED_INPUTS, 0);
+    	String name = settings.getString("name", "");
+    	String phone_number = settings.getString("number","");
+    	
+    	EditText phone_text = (EditText) this.findViewById(
+    			R.id.phone_number_input);
+    	phone_text.setText(phone_number);
+    	
+    	EditText name_text = (EditText) AddFromDialpad.this.
+    			findViewById(R.id.name_input);
+    	name_text.setText(name);
+    }
+    
+    /*
+     * Overriden to clear values when the activity is destroyed so names
+     * and numbers to not persist between uses.
+     * 
+     * (non-Javadoc)
+     * @see android.app.Activity#onDestroy()
+     */
+    @Override
+    protected void onDestroy()
+    {
+    	super.onDestroy();
+    	
+    	super.onPause();
+    	/* get the preference file to edit */
+    	SharedPreferences settings = getSharedPreferences(SAVED_INPUTS, 0);
+
+    	/* create editor and clear values */
+    	Editor editSettings = settings.edit();
+    	
+    	editSettings.clear();
+
+    	editSettings.apply();
+    }
+
 }

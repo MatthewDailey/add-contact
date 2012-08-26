@@ -27,12 +27,11 @@ import android.widget.TextView;
 
 /**
  * AddFromText
- * @author Matt
  *
  * This activity allows the user to add a new contact by selecting a recent
  * text message from a list with the new contacts name. It sets the contact
  * number as the address of the incoming text and the name as the body of 
- * the message.
+ * the message. 
  * 
  * The application will prevent a user from adding a multiple contacts and 
  * popup a message displaying the name of the contact with the nubmer they
@@ -40,6 +39,8 @@ import android.widget.TextView;
  * selects a message to make sure erronious contacts are not added if the 
  * wrong text is selected. Once a contact is successfully added, the activity
  * will finish and leave the user with a message saying teh contact was added.
+ * 
+ * @author Matt
  */
 public class AddFromText extends Activity {
 
@@ -95,10 +96,10 @@ public class AddFromText extends Activity {
 			
 			ArrayList<TextInfo> recentTexts = new ArrayList<TextInfo>(); 
 
-			/* add at most 20 most recent text messages and create TextInfo
+			/* add at most 50 most recent text messages and create TextInfo
 			 * objects out of them to return.  */
 			int cnt = 0;
-			while( c.moveToNext() && cnt < 20)
+			while( c.moveToNext() && cnt < 50)
 			{
 				TextInfo ti = new TextInfo();
 				/* get the address which is the phone number then getName() to
@@ -204,7 +205,7 @@ public class AddFromText extends Activity {
 	            	        		    * if we fail.    */
 	            	        		   try
 	            	        		   {
-	            	        		   Util.toast_msg(AddFromText.this, 
+	            	        			   Util.toast_msg(AddFromText.this, 
 	           	        					"Added Contact: "+msg);
 	            	        		   }
 	            	        		   catch(Exception e)
@@ -308,11 +309,12 @@ public class AddFromText extends Activity {
     
     /**
      * CustomTextBaseAdapter
-     * @author Matt
      *
      * Create a listview from a arraylist of TextInfo objects. The listview
      * shows the name of a preexisting contact or the number of a new contact
      * followed by the content of hte text message.
+     * 
+     * @author Matt Dailey
      */
     public class CustomTextBaseAdapter extends BaseAdapter {
     	
@@ -367,11 +369,12 @@ public class AddFromText extends Activity {
     
     /**
      * TextInfo
-     * @author Matt
      *
      * Object representing a text message storing the name of a prexisting
      * contact or a number if no name is assigned to it as well as the 
      * body of the message.
+     * 
+     * @author Matt Dailey
      */
     private class TextInfo
     {
