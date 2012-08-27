@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * SetName
@@ -32,6 +33,17 @@ public class SetName extends Activity
             super.onCreate(savedInstanceState);
             this.requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.set_name);
+            
+            /* attempt to find and set the users name */
+            EditText name_input = (EditText) this.findViewById(R.id.set_name_input);
+            String name_attempt = Util.getUserName(getContentResolver());
+            if( !name_attempt.equals("") )
+            {
+            	TextView found_name_msg = (TextView) this.findViewById(R.id.found_name_msg);
+            	found_name_msg.setText(getString(R.string.found_name));
+            	name_input.setText(name_attempt);
+            }
+            
 
             /* set the onclick handler */
             Button set_name = (Button) this.findViewById(R.id.set_name_button);

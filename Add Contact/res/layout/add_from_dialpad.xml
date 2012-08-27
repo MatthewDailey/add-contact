@@ -14,7 +14,7 @@
             android:orientation="vertical" 
              >
 
-            <CheckedTextView
+            <TextView
                 android:id="@+id/CheckedTextView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 <requestFocus />
             </EditText>
 
-            <CheckedTextView
+            <TextView
                 android:id="@+id/checkedTextView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,24 +48,28 @@
 
                 
             </EditText>
-
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                android:layout_marginBottom="20dp">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="top" >
 
                 <ToggleButton
                     android:id="@+id/should_text_toggle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
-
-                <CheckedTextView
+
+                <TextView
                     android:id="@+id/checkedTextView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
+                    android:checked="true"
+                    android:gravity="center_vertical"
                     android:text="@string/send_w_name" />
+
             </LinearLayout>
     <Button
         android:id="@+id/add_dial_button"

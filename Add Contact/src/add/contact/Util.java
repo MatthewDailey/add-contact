@@ -84,20 +84,22 @@ public class Util
     	/* break based on os version since user name retreival
     	 * was not supported until verion 14    	 */
     	if (android.os.Build.VERSION.SDK_INT >= 14) {
-        	
+        	System.out.println("Entered version specific name look up");
         	/* get content uri */
     		Uri uri = ContactsContract.Profile.CONTENT_URI;
         	/* project only display name */
         	String[] projection = new String []{
         			ContactsContract.Contacts.DISPLAY_NAME
-        			
         	};
-        	/* only get user data */
-        	String selection = ContactsContract.Contacts.IS_USER_PROFILE 
-        			+ " = '1'";
         	/* get the cursor for query */
-        	Cursor c = cr.query(uri, projection, selection, null, null);
-
+        	Cursor c = cr.query(uri, projection, null, null, null);
+        	
+        	while( c.moveToNext() ){
+        	for( String s : c.getColumnNames())
+        	{
+        		System.out.println(s + " : " + c.getString(c.getColumnIndex(s)));
+        	}}
+        	
         	/* retreive the name */
         	try
         	{

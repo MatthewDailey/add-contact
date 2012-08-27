@@ -110,7 +110,6 @@ public class AddFromDialpad extends Activity {
 		    	 * activity. Catch any exception and alert gracefully */
 		    	try
 		    	{
-	
 		    		Util.addContact(AddFromDialpad.this, phone, name);
 		    		
 		    		/* attempt to send text, if no exception was thrown 
@@ -152,12 +151,6 @@ public class AddFromDialpad extends Activity {
 				}
 			}
     	});
-
-    	/* make sure no erronious checked box */
-    	if( shouldSend.isChecked() && getName().equals(NO_NAME))
-    	{
-    		shouldSend.setChecked(false);
-    	}
     }
 
     /**
@@ -202,10 +195,9 @@ public class AddFromDialpad extends Activity {
     	final Intent i = new Intent();
     	i.setClass(this, SetName.class);
     	
-    	Util.getUserName(getContentResolver());
-    	
     	/* set up alert builder */
-    	builder.setMessage("There is no name associated with this app. Would you like to add one?")
+    	builder.setMessage("There is no name associated with this app. " +
+    			"Would you like to add one?")
     	       .setCancelable(false)
     	       /* add a yes button */
     	       .setPositiveButton("Yes", new DialogInterface.OnClickListener() 
@@ -284,15 +276,18 @@ public class AddFromDialpad extends Activity {
     	/* get the preference file to edit */
     	SharedPreferences settings = getSharedPreferences(SAVED_INPUTS, 0);
     	
-    	/* get the text fields with values to save */
+    	/* get the fields with values to save */
     	EditText phone_text = (EditText) AddFromDialpad.this.
     			findViewById(R.id.phone_number_input);
     	EditText name_text = (EditText) AddFromDialpad.this.
     			findViewById(R.id.name_input);
+    	ToggleButton shouldSend = (ToggleButton) this.
+    			findViewById(R.id.should_text_toggle);
     	
     	/* create editor and set current values */
     	Editor editSettings = settings.edit();
     	
+    	editSettings.putBoolean("isChecked", shouldSend.isChecked() );
     	editSettings.putString("name", name_text.getText().toString() );
     	editSettings.putString("number", phone_text.getText().toString() );
 
@@ -310,10 +305,13 @@ public class AddFromDialpad extends Activity {
     {
     	super.onResume();
     	
+    	/* read in the saved values */
     	SharedPreferences settings = getSharedPreferences(SAVED_INPUTS, 0);
     	String name = settings.getString("name", "");
     	String phone_number = settings.getString("number","");
+    	boolean send = settings.getBoolean("isChecked", false);
     	
+    	/* set the various fields */
     	EditText phone_text = (EditText) this.findViewById(
     			R.id.phone_number_input);
     	phone_text.setText(phone_number);
@@ -321,6 +319,10 @@ public class AddFromDialpad extends Activity {
     	EditText name_text = (EditText) AddFromDialpad.this.
     			findViewById(R.id.name_input);
     	name_text.setText(name);
+    	
+    	ToggleButton shouldSend = (ToggleButton) this.
+    			findViewById(R.id.should_text_toggle);
+    	shouldSend.setChecked(send && !getName().equals(NO_NAME) );
     }
     
     /*

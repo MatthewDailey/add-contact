@@ -53,4 +53,6 @@
 	     most recently added order by
 	    clicking the \"Recent Contacts\" button. Clicking a contact in the
 	    list will take you to that contacts page.</string>   
+	<string name="found_name">Add Contact was able to find your name on your phone. 
+	     If it is correct, just hit Set Name. Otherwise, change it to whatever you want.</string>
 </resources>
