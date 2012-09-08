@@ -195,11 +195,13 @@ public class Util
      */
     public static void addContact(Activity a, String phone, String name)
     {
+    	/* correct caps */
+    	name = capitalizeName(name);
     	
     	/* get the account and group info */
     	String[] acct_info = getVisibleAccount(a.getContentResolver());
     	String group_id = acct_info[0];
-    	String acct_name = acct_info[1];
+    	String acct_name = acct_info[1]; 
     	String acct_type = acct_info[2];
     	
     	/* check to make sure such a group exists, if not we are S.O.L. 
@@ -209,7 +211,7 @@ public class Util
     		toast_msg(a, "Unable to find valid contact group. " +
     				"This function may not work for you.");
     	}
-    	else
+    	else 
     	{
     		/* create a batch operation to perform on the database */
 	        ArrayList<ContentProviderOperation> ops = 
@@ -265,6 +267,29 @@ public class Util
 	        	toast_msg(a, "Failed to create new contact.");
 	        }
     	}
+    }
+    
+    /**
+     * capitalize the first letter in each word in a persons name.
+     * 
+     * @param name the name the be capitalized
+     * @return a correctly capitalized version of the the name. 
+     */
+    private static String capitalizeName( String name ) 
+    {
+    	String[] words = name.split("\\s+");
+    	
+    	StringBuilder sb = new StringBuilder();
+    	
+    	for( String word : words)
+    	{
+    		sb.append(Character.toUpperCase(word.charAt(0)))
+    	        .append( word.substring(1).toLowerCase() );
+
+    		sb.append(" ");
+    	}
+    	
+    	return sb.toString();
     }
 
 }
