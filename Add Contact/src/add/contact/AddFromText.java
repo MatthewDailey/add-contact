@@ -44,6 +44,9 @@ import android.widget.TextView;
  */
 public class AddFromText extends Activity {
 
+	/* Async task to fetch recent text messages */
+	private LoadMessages retreiver;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,21 @@ public class AddFromText extends Activity {
         
         /* display loading screen and launch async loading task */
         setContentView(R.layout.progress);
-        new LoadMessages(getContentResolver()).execute();
+        retreiver = new LoadMessages(getContentResolver());
+        retreiver.execute();
+    }
+
+    /*
+     * Override to make sure to cancel the async task if the loading is pause.
+     * 
+     * (non-Javadoc)
+     * @see android.app.Activity#onPause()
+     */
+    @Override
+    public void onPause()
+    {
+    	super.onPause();
+    	retreiver.cancel(true);
     }
 	
     /**
@@ -162,6 +179,7 @@ public class AddFromText extends Activity {
 		protected void onPostExecute(ArrayList<TextInfo> texts)
 		{
 	        setContentView(R.layout.activity_add_from_text);
+	        
 	        
 	        /* get the contact list view */
 	        final ListView lv1 = (ListView) findViewById(R.id.ListView01);

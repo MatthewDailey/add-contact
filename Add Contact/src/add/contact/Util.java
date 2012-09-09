@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -294,9 +295,4 @@ public class Util
     	return sb.toString().trim();
     }
     
-    public static void openSettings()
-    {
-    	
-    }
-
 }

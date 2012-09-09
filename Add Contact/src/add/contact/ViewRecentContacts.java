@@ -33,6 +33,8 @@ import android.database.Cursor;
  */
 public class ViewRecentContacts extends Activity 
 {
+	/* copy of the async contact loader task, used to cancel if necessary */
+	private LoadContacts retreiver;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -43,8 +45,23 @@ public class ViewRecentContacts extends Activity
         setContentView(R.layout.progress);
 
         /* Execute task to get contact list. */
-        new LoadContacts(getContentResolver()).execute();
+        retreiver = new LoadContacts(getContentResolver());
+        retreiver.execute();
     }
+	
+    /*
+     * Override to make sure to cancel the async task if the loading is pause.
+     * 
+     * (non-Javadoc)
+     * @see android.app.Activity#onPause()
+     */
+    @Override
+    public void onPause()
+    {
+    	super.onPause();
+    	retreiver.cancel(true);
+    }
+	
 	
 	@Override
 	public void onRestart()
