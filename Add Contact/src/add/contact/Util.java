@@ -277,19 +277,26 @@ public class Util
      */
     private static String capitalizeName( String name ) 
     {
+    	/* split the input on white space */
     	String[] words = name.split("\\s+");
     	
+    	/* build the string */
     	StringBuilder sb = new StringBuilder();
-    	
     	for( String word : words)
     	{
     		sb.append(Character.toUpperCase(word.charAt(0)))
     	        .append( word.substring(1).toLowerCase() );
-
+    		
     		sb.append(" ");
     	}
     	
-    	return sb.toString();
+    	/* return the string, trim trailing white space. */
+    	return sb.toString().trim();
+    }
+    
+    public static void openSettings()
+    {
+    	
     }
 
 }

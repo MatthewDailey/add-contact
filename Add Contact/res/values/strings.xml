@@ -23,6 +23,7 @@
     <string name="contact">contact</string>
     <string name="r_t_m">Recent Text Messages</string>
     <string name="title_activity_how_to_use">HowToUse</string>
+    <string name="how_to">How to use Add Contact</string>
     
     <!-- strings for info page  -->
 	<string name="header">How to use Add Contact</string>
