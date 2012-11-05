@@ -1,24 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content" >
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="false"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="92dp"
+        android:layout_centerHorizontal="true"
         android:dividerPadding="@dimen/padding_large"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingTop="60dp" >
 
         <Button
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="25dp"
+            android:minHeight="100dip"
+            android:minWidth="48dip"
+            android:padding="30dp"
             android:text="@string/from_text"
             android:textColor="#000000"
             android:textSize="@dimen/padding_large" />
@@ -28,7 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/padding_large"
-            android:padding="25dp"
+            android:minHeight="100dip"
+            android:padding="30dp"
             android:text="@string/from_dialpad"
             android:textSize="@dimen/padding_large" />
 
@@ -36,45 +37,10 @@
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="25dp"
+            android:minHeight="100dip"
+            android:padding="30dp"
             android:text="@string/recent_contacts"
             android:textSize="@dimen/padding_large" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:padding="0dp"
-        android:text="@string/add"
-        android:textColor="#0055AA"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:typeface="monospace" />
-
-    <ImageButton
-        android:id="@+id/menu_button"
-        style="@android:style/Theme.Black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@null"
-        android:onClick="openOptionsMenu"
-        android:src="@android:drawable/ic_input_get" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_margin="0dp"
-        android:layout_toRightOf="@+id/textView1"
-        android:padding="0dp"
-        android:text="@string/contact"
-        android:textColor="#0055AA"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:typeface="monospace" />
 
 </RelativeLayout>

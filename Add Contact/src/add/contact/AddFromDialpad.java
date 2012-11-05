@@ -1,17 +1,17 @@
 package add.contact;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.support.v4.app.FragmentActivity;
 import android.telephony.SmsManager;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -36,7 +36,7 @@ import android.widget.ToggleButton;
  * name has been set. If the contact is successfully added, the activity will
  * exit leaving a popup message saying the contact has been added.
  */
-public class AddFromDialpad extends Activity {
+public class AddFromDialpad extends FragmentActivity {
 	
 	/* name of preference file to look up chosen name to send */
     public static final String PREFS_NAME = "NameFile";
@@ -50,7 +50,6 @@ public class AddFromDialpad extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.add_from_dialpad);
 
         prepareScreen();
@@ -64,6 +63,47 @@ public class AddFromDialpad extends Activity {
         setContentView(R.layout.add_from_dialpad);
         
         prepareScreen();
+    }
+    
+    /**
+     * Open options list which allows the user to change the name which
+     * will be texted to new contacts as well as an information page.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) 
+    {	
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.activity_menu, menu);
+    	
+    	/* create a set name option in the menu */
+    	MenuItem setName = menu.getItem(1);
+    	setName.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(AddFromDialpad.this, SetName.class);
+				AddFromDialpad.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
+    	/* create an info option in the menu */
+    	MenuItem info = menu.getItem(0);
+    	info.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) 
+			{
+				Intent i = new Intent();
+				i.setClass(AddFromDialpad.this, HowToUse.class);
+				AddFromDialpad.this.startActivity(i);
+				return true;
+			}
+    	});
+    	
+    	
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
     }
     
     /**
@@ -226,42 +266,7 @@ public class AddFromDialpad extends Activity {
     	alert.show();
     }
         
-    /**
-     * Set up options menu to either set name or show how-to
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	
-    	/* create a set name option in the menu */
-    	MenuItem setName = menu.add("Set Name");
-    	setName.setOnMenuItemClickListener(new OnMenuItemClickListener(){
-			@Override
-			public boolean onMenuItemClick(MenuItem item) 
-			{
-				Intent i = new Intent();
-				i.setClass(AddFromDialpad.this, SetName.class);
-				AddFromDialpad.this.startActivity(i);
-				return true;
-			}
-    	});
-    	
-    	/* create an info option in the menu */
-    	MenuItem info = menu.add("How to use Add Contact");
-    	info.setOnMenuItemClickListener(new OnMenuItemClickListener(){
-			@Override
-			public boolean onMenuItemClick(MenuItem item) 
-			{
-				Intent i = new Intent();
-				i.setClass(AddFromDialpad.this, HowToUse.class);
-				AddFromDialpad.this.startActivity(i);
-				return true;
-			}
-    	});
-    	
-    	
-        getMenuInflater().inflate(R.menu.activity_add_from_dialpad, menu);
-        return true;
-    }
+
     
     /*
      * Overriden to save input values for name and phone number.
@@ -274,7 +279,7 @@ public class AddFromDialpad extends Activity {
     {
     	super.onPause();
     	/* get the preference file to edit */
-    	SharedPreferences settings = getSharedPreferences(SAVED_INPUTS, 0);
+    	SharedPreferences settings = getSharedPreferences(SAVED_INPUTS, 0); 
     	
     	/* get the fields with values to save */
     	EditText phone_text = (EditText) AddFromDialpad.this.
@@ -335,9 +340,6 @@ public class AddFromDialpad extends Activity {
     @Override
     protected void onDestroy()
     {
-    	super.onDestroy();
-    	
-    	super.onPause();
     	/* get the preference file to edit */
     	SharedPreferences settings = getSharedPreferences(SAVED_INPUTS, 0);
 
@@ -347,6 +349,8 @@ public class AddFromDialpad extends Activity {
     	editSettings.clear();
 
     	editSettings.apply();
+    	
+     	super.onDestroy();
     }
 
 }

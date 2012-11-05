@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +30,6 @@ public class SetName extends Activity
         public void onCreate(Bundle savedInstanceState) {
         	/* establish the UI */
             super.onCreate(savedInstanceState);
-            this.requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.set_name);
             
             /* attempt to find and set the users name */

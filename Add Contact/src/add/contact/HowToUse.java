@@ -3,7 +3,6 @@ package add.contact;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-import android.view.Window;
 
 /**
  * HowToUse
@@ -18,7 +17,6 @@ public class HowToUse extends Activity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_how_to_use);
     }
 

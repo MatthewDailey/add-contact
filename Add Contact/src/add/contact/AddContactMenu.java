@@ -1,13 +1,13 @@
 package add.contact;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
@@ -23,7 +23,7 @@ import android.widget.Button;
  * 		iii) view your contacts list in most recently added order.
  * 		iv) set the name the app send in action (ii)                  
  */
-public class AddContactMenu extends Activity 
+public class AddContactMenu extends FragmentActivity 
 {
 	
 	/*
@@ -35,7 +35,6 @@ public class AddContactMenu extends Activity
     {
         super.onCreate(savedInstanceState);
         /* set up layout */
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_menu);    
         
         /* bind listeners to menu buttons */
@@ -97,9 +96,11 @@ public class AddContactMenu extends Activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) 
     {	
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.activity_menu, menu);
     	
     	/* create a set name option in the menu */
-    	MenuItem setName = menu.add("Set Name");
+    	MenuItem setName = menu.getItem(1);
     	setName.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item) 
@@ -112,7 +113,7 @@ public class AddContactMenu extends Activity
     	});
     	
     	/* create an info option in the menu */
-    	MenuItem info = menu.add("How to use Add Contact");
+    	MenuItem info = menu.getItem(0);
     	info.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item) 

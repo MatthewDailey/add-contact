@@ -14,10 +14,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -50,25 +50,11 @@ public class AddFromText extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         
         /* display loading screen and launch async loading task */
         setContentView(R.layout.progress);
         retreiver = new LoadMessages(getContentResolver());
         retreiver.execute();
-    }
-
-    /*
-     * Override to make sure to cancel the async task if the loading is pause.
-     * 
-     * (non-Javadoc)
-     * @see android.app.Activity#onPause()
-     */
-    @Override
-    public void onPause()
-    {
-    	super.onPause();
-    	retreiver.cancel(true);
     }
 	
     /**
@@ -290,13 +276,17 @@ public class AddFromText extends Activity {
     }
     
     /**
-     * Set up options menu to either set name or how-to
+     * Open options list which allows the user to change the name which
+     * will be texted to new contacts as well as an information page.
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) 
+    {	
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.activity_menu, menu);
     	
     	/* create a set name option in the menu */
-    	MenuItem setName = menu.add("Set Name");
+    	MenuItem setName = menu.getItem(1);
     	setName.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item) 
@@ -309,7 +299,7 @@ public class AddFromText extends Activity {
     	});
     	
     	/* create an info option in the menu */
-    	MenuItem info = menu.add("How to use Add Contact");
+    	MenuItem info = menu.getItem(0);
     	info.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item) 
@@ -321,9 +311,11 @@ public class AddFromText extends Activity {
 			}
     	});
     	
-        getMenuInflater().inflate(R.menu.activity_add_from_text, menu);
+    	
+        getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
+    
     
     /**
      * CustomTextBaseAdapter

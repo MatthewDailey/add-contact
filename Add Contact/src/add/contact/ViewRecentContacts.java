@@ -7,10 +7,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -18,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -31,7 +31,7 @@ import android.database.Cursor;
  * recently added order. The layout is a simple list of contacts, when 
  * clicked they display the contact page for that contact.
  */
-public class ViewRecentContacts extends Activity 
+public class ViewRecentContacts extends FragmentActivity 
 {
 	/* copy of the async contact loader task, used to cancel if necessary */
 	private LoadContacts retreiver;
@@ -41,7 +41,6 @@ public class ViewRecentContacts extends Activity
 	{
 		/* display loading ui while the contacs load */
 		super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.progress);
 
         /* Execute task to get contact list. */
@@ -74,12 +73,18 @@ public class ViewRecentContacts extends Activity
         new LoadContacts(getContentResolver()).execute();
 	}
 	
-	/* set up menu buttons */
+	   /**
+     * Open options list which allows the user to change the name which
+     * will be texted to new contacts as well as an information page.
+     */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) 
+    {	
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.activity_menu, menu);
     	
     	/* create a set name option in the menu */
-    	MenuItem setName = menu.add("Set Name");
+    	MenuItem setName = menu.getItem(1);
     	setName.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item) 
@@ -92,7 +97,7 @@ public class ViewRecentContacts extends Activity
     	});
     	
     	/* create an info option in the menu */
-    	MenuItem info = menu.add("How to use Add Contact");
+    	MenuItem info = menu.getItem(0);
     	info.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item) 
@@ -104,7 +109,8 @@ public class ViewRecentContacts extends Activity
 			}
     	});
     	
-        getMenuInflater().inflate(R.menu.recentcontacts, menu);
+    	
+        getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
 	

@@ -8,9 +8,9 @@
     <string name="title_activity_add_from_dialpad">AddFromDialpad</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_add_from_text">AddFromText</string>
-    <string name="recent_contacts">Recent Contacts</string>
-    <string name="from_dialpad">From Dialpad</string>
-    <string name="from_text">From SMS</string>
+    <string name="recent_contacts">View Recent Contacts</string>
+    <string name="from_dialpad">Add Contact from Dialpad</string>
+    <string name="from_text">Add Contact from SMS</string>
     <string name="name_to_send">Name to be sent to new contacts:</string>
     <string name="set_name">Set Name</string>
     <string name="loading">Loading &#8230;</string>
